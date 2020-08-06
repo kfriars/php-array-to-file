@@ -28,7 +28,7 @@ composer require spatie/php-array-to-file
 ## Usage
 
 ``` php
-$skeleton = new Kfriars\PhpArrayToFile();
+$skeleton = new Kfriars\ArrayToFile();
 echo $skeleton->echoPhrase('Hello, Kfriars!');
 ```
 

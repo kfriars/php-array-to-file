@@ -1,6 +1,6 @@
 <?php
 
-namespace Kfriars\PhpArrayToFile\Tests;
+namespace Kfriars\ArrayToFile\Tests;
 
 use PHPUnit\Framework\TestCase;
 

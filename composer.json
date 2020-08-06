@@ -25,12 +25,12 @@
     },
     "autoload": {
         "psr-4": {
-            "Kfriars\\PhpArrayToFile\\": "src"
+            "Kfriars\\ArrayToFile\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Kfriars\\PhpArrayToFile\\Tests\\": "tests"
+            "Kfriars\\ArrayToFile\\Tests\\": "tests"
         }
     },
     "scripts": {
