@@ -1,6 +1,6 @@
 <?php
 
-namespace Spatie\Skeleton\Tests;
+namespace Kfriars\PhpArrayToFile\Tests;
 
 use PHPUnit\Framework\TestCase;
 

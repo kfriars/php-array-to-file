@@ -1,16 +1,16 @@
 {
-    "name": ":vendor_name/:package_name",
-    "description": ":package_description",
+    "name": "kfriars/php-array-to-file",
+    "description": "Convert a php array into a .php file that can be included",
     "keywords": [
-        ":vendor_name",
-        ":package_name"
+        "kfriars",
+        "php-array-to-file"
     ],
-    "homepage": "https://github.com/spatie/:package_name",
+    "homepage": "https://github.com/spatie/php-array-to-file",
     "license": "MIT",
     "authors": [
         {
-            "name": ":author_name",
-            "email": ":author_email",
+            "name": "Kurt Friars",
+            "email": "kfriars@gmail.com",
             "homepage": "https://spatie.be",
             "role": "Developer"
         }
@@ -25,12 +25,12 @@
     },
     "autoload": {
         "psr-4": {
-            "Spatie\\Skeleton\\": "src"
+            "Kfriars\\PhpArrayToFile\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Spatie\\Skeleton\\Tests\\": "tests"
+            "Kfriars\\PhpArrayToFile\\Tests\\": "tests"
         }
     },
     "scripts": {
