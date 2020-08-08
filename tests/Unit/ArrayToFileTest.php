@@ -67,20 +67,20 @@ class ArrayToFileTest extends TestCase
         ArrayWriter::toFile($array, $this->file);
 
         $lines = file($this->file);
-        $this->assertEquals("return [\n", $lines[2]);
-        $this->assertEquals("    'a' => [\n", $lines[3]);
-        $this->assertEquals("        'b' => [\n", $lines[4]);
-        $this->assertEquals("            'a',\n", $lines[5]);
-        $this->assertEquals("            'b',\n", $lines[6]);
-        $this->assertEquals("            'c',\n", $lines[7]);
-        $this->assertEquals("        ],\n", $lines[8]);
-        $this->assertEquals("        'c' => [\n", $lines[9]);
-        $this->assertEquals("            'a',\n", $lines[10]);
-        $this->assertEquals("            'b',\n", $lines[11]);
-        $this->assertEquals("            'c',\n", $lines[12]);
-        $this->assertEquals("        ],\n", $lines[13]);
-        $this->assertEquals("    ],\n", $lines[14]);
-        $this->assertEquals("];\n", $lines[15]);
+        $this->assertEquals("return [".PHP_EOL, $lines[2]);
+        $this->assertEquals("    'a' => [".PHP_EOL, $lines[3]);
+        $this->assertEquals("        'b' => [".PHP_EOL, $lines[4]);
+        $this->assertEquals("            'a',".PHP_EOL, $lines[5]);
+        $this->assertEquals("            'b',".PHP_EOL, $lines[6]);
+        $this->assertEquals("            'c',".PHP_EOL, $lines[7]);
+        $this->assertEquals("        ],".PHP_EOL, $lines[8]);
+        $this->assertEquals("        'c' => [".PHP_EOL, $lines[9]);
+        $this->assertEquals("            'a',".PHP_EOL, $lines[10]);
+        $this->assertEquals("            'b',".PHP_EOL, $lines[11]);
+        $this->assertEquals("            'c',".PHP_EOL, $lines[12]);
+        $this->assertEquals("        ],".PHP_EOL, $lines[13]);
+        $this->assertEquals("    ],".PHP_EOL, $lines[14]);
+        $this->assertEquals("];".PHP_EOL, $lines[15]);
     }
 
     /** @test */
@@ -89,9 +89,9 @@ class ArrayToFileTest extends TestCase
         ArrayWriter::toFile(['a', 'b', 'c'], $this->file);
 
         $lines = file($this->file);
-        $this->assertEquals("    'a',\n", $lines[3]);
-        $this->assertEquals("    'b',\n", $lines[4]);
-        $this->assertEquals("    'c',\n", $lines[5]);
+        $this->assertEquals("    'a',".PHP_EOL, $lines[3]);
+        $this->assertEquals("    'b',".PHP_EOL, $lines[4]);
+        $this->assertEquals("    'c',".PHP_EOL, $lines[5]);
     }
 
     /** @test */
@@ -100,10 +100,10 @@ class ArrayToFileTest extends TestCase
         ArrayWriter::toFile(['a' => 1, 'b' => 2, 'c' => 3, 'd' => true], $this->file);
 
         $lines = file($this->file);
-        $this->assertEquals("    'a' => 1,\n", $lines[3]);
-        $this->assertEquals("    'b' => 2,\n", $lines[4]);
-        $this->assertEquals("    'c' => 3,\n", $lines[5]);
-        $this->assertEquals("    'd' => true,\n", $lines[6]);
+        $this->assertEquals("    'a' => 1,".PHP_EOL, $lines[3]);
+        $this->assertEquals("    'b' => 2,".PHP_EOL, $lines[4]);
+        $this->assertEquals("    'c' => 3,".PHP_EOL, $lines[5]);
+        $this->assertEquals("    'd' => true,".PHP_EOL, $lines[6]);
     }
 
     /** @test */
@@ -114,10 +114,10 @@ class ArrayToFileTest extends TestCase
         });
 
         $lines = file($this->file);
-        $this->assertEquals("    false,\n", $lines[3]);
-        $this->assertEquals("    true,\n", $lines[4]);
-        $this->assertEquals("    false,\n", $lines[5]);
-        $this->assertEquals("    true,\n", $lines[6]);
+        $this->assertEquals("    false,".PHP_EOL, $lines[3]);
+        $this->assertEquals("    true,".PHP_EOL, $lines[4]);
+        $this->assertEquals("    false,".PHP_EOL, $lines[5]);
+        $this->assertEquals("    true,".PHP_EOL, $lines[6]);
     }
 
     /** @test */
