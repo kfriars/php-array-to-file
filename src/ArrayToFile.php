@@ -6,7 +6,7 @@ use Kfriars\ArrayToFile\Contracts\FileContract;
 
 class ArrayToFile
 {
-    /** @var FileContract Responsible for saving the file*/
+    /** @var FileContract Responsible for saving the file */
     protected $file;
 
     /** @var int The current indentation level for pretty printing */
@@ -149,7 +149,7 @@ class ArrayToFile
      */
     protected function isAssoc($array)
     {
-        if (array() === $array) {
+        if ([] === $array) {
             return false;
         }
 

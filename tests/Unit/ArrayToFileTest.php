@@ -36,7 +36,7 @@ class ArrayToFileTest extends TestCase
                     'string' => 'Object string',
                     'boolean' => false,
                     'int' => -3,
-                ]
+                ],
             ],
         ];
 
