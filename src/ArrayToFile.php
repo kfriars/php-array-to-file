@@ -7,7 +7,7 @@ use Kfriars\ArrayToFile\Exceptions\FileSaveException;
 
 class ArrayToFile
 {
-    /** @var FileContract Responsible for saving the file*/
+    /** @var FileContract Responsible for saving the file */
     protected $file;
 
     /** @var int The current indentation level for pretty printing */
@@ -147,7 +147,7 @@ class ArrayToFile
      */
     protected function isAssociative($array)
     {
-        if (array() === $array) {
+        if ([] === $array) {
             return false;
         }
 
