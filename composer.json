@@ -5,21 +5,22 @@
         "kfriars",
         "php-array-to-file"
     ],
-    "homepage": "https://github.com/spatie/php-array-to-file",
+    "homepage": "https://github.com/kfriars/php-array-to-file",
     "license": "MIT",
     "authors": [
         {
             "name": "Kurt Friars",
             "email": "kfriars@gmail.com",
-            "homepage": "https://spatie.be",
+            "homepage": "https://kurtfriars.com",
             "role": "Developer"
         }
     ],
     "require": {
-        "php": "^7.4"
+        "php": "^5.0|^7.0"
     },
     "require-dev": {
         "friendsofphp/php-cs-fixer": "^2.16",
+        "mockery/mockery": "^1.4",
         "phpunit/phpunit": "^9.0",
         "vimeo/psalm": "^3.11"
     },

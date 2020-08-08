@@ -1,35 +1,60 @@
-# Convert a php array into a .php file that can be included
+# Convert a php array into an includeable php file
 
-[![Latest Version on Packagist](https://img.shields.io/packagist/v/spatie/php-array-to-file.svg?style=flat-square)](https://packagist.org/packages/spatie/php-array-to-file)
-[![GitHub Tests Action Status](https://img.shields.io/github/workflow/status/spatie/php-array-to-file/run-tests?label=tests)](https://github.com/spatie/php-array-to-file/actions?query=workflow%3Arun-tests+branch%3Amaster)
-[![Total Downloads](https://img.shields.io/packagist/dt/spatie/php-array-to-file.svg?style=flat-square)](https://packagist.org/packages/spatie/php-array-to-file)
+[![Latest Version on Packagist](https://img.shields.io/packagist/v/kfriars/php-array-to-file.svg?style=flat-square)](https://packagist.org/packages/kfriars/php-array-to-file)
+[![GitHub Tests Action Status](https://img.shields.io/github/workflow/status/kfriars/php-array-to-file/run-tests?label=tests)](https://github.com/kfriars/php-array-to-file/actions?query=workflow%3Arun-tests+branch%3Amaster)
+[![Total Downloads](https://img.shields.io/packagist/dt/kfriars/php-array-to-file.svg?style=flat-square)](https://packagist.org/packages/kfriars/php-array-to-file)
 
-
-This is where your description should go. Try and limit it to a paragraph or two. Consider adding a small example.
-
-## Support us
-
-Learn how to create a package like this one, by watching our premium video course:
-
-[![Laravel Package training](https://spatie.be/github/package-training.jpg)](https://laravelpackage.training)
-
-We invest a lot of resources into creating [best in class open source packages](https://spatie.be/open-source). You can support us by [buying one of our paid products](https://spatie.be/open-source/support-us).
-
-We highly appreciate you sending us a postcard from your hometown, mentioning which of our package(s) you are using. You'll find our address on [our contact page](https://spatie.be/about-us). We publish all received postcards on [our virtual postcard wall](https://spatie.be/open-source/postcards).
+The purpose of this package is to print an array to a file in a reader-friendly format, that can later be included as php. The package supports deeply nested arrays, with numeric, string, boolean and object values.
 
 ## Installation
 
 You can install the package via composer:
 
 ```bash
-composer require spatie/php-array-to-file
+composer require kfriars/php-array-to-file
 ```
 
 ## Usage
+You can use the static method ```toFile(...)``` on ```Kfriars\ArrayToFile\ArrayWriter``` for convenient use, or you can inject the ```Kfriars\ArrayToFile\ArrayToFile``` class as a dependency, and use ```write(...)```.
 
+An example of use:
 ``` php
-$skeleton = new Kfriars\ArrayToFile();
-echo $skeleton->echoPhrase('Hello, Kfriars!');
+ArrayWriter::toFile([1, 2, 3], '/absolute/path/to/file.php');
+```
+
+Would create ```/absolute/path/to/file.php``` with the contents:
+```
+<?php
+
+return [
+    1,
+    2,
+    3,
+];
+
+```
+
+The package also allows you to transform the values in your array by passing in a callable. The callable receives the value before it is written to the file, and should return the value you desire to have written. You can use it like:
+``` php
+function save(ArrayToFile $a2f)
+{
+    $a2f->write([0, 1, '', ' '], '/absolute/path/to/file.php', function ($value) {
+        return (bool) $value;
+    });
+}
+```
+
+Which will create ```/absolute/path/to/file.php``` with the contents:
+```
+<?php
+
+return [
+    false,
+    true,
+    false,
+    true,
+];
+
 ```
 
 ## Testing
@@ -48,7 +73,7 @@ Please see [CONTRIBUTING](CONTRIBUTING.md) for details.
 
 ## Security
 
-If you discover any security related issues, please email freek@spatie.be instead of using the issue tracker.
+If you discover any security related issues, please email nyxsoft.inc@gmail.com instead of using the issue tracker.
 
 ## Credits
 
