@@ -2,6 +2,8 @@
 
 namespace Kfriars\ArrayToFile\Contracts;
 
+use Kfriars\ArrayToFile\Exceptions\FileSaveException;
+
 interface FileContract
 {
     /**

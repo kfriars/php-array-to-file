@@ -3,6 +3,7 @@
 namespace Kfriars\ArrayToFile;
 
 use Kfriars\ArrayToFile\Contracts\FileContract;
+use Kfriars\ArrayToFile\Exceptions\FileSaveException;
 
 class ArrayToFile
 {
@@ -57,7 +58,7 @@ class ArrayToFile
         }
 
         $this->startArrayFile();
-        $this->arrayToLines($array, $transform, $this->isAssoc($array));
+        $this->arrayToLines($array, $transform, $this->isAssociative($array));
         $this->finishArrayFile();
 
         $this->file->save($filepath, $this->content);
@@ -83,27 +84,24 @@ class ArrayToFile
      *
      * @param array $array
      * @param callable $transform
-     * @param bool $isAssoc
+     * @param bool $isAssociative
      * @return void
      */
-    protected function arrayToLines($array, $transform, $isAssoc)
+    protected function arrayToLines($array, $transform, $isAssociative)
     {
         foreach ($array as $key => $value) {
+            if (is_object($value)) {
+                $value = (array) $value;
+            }
+
             if (is_array($value)) {
                 $this->newLine("'" . $key . "' => [");
                 $this->indentationLevel++;
-                $this->arrayToLines($value, $transform, $this->isAssoc($value));
-                $this->indentationLevel--;
-                $this->newLine('],');
-            } elseif (is_object($value)) {
-                $this->newLine("'" . $key . "' => [");
-                $this->indentationLevel++;
-                $cast = (array) $value;
-                $this->arrayToLines($cast, $transform, $this->isAssoc($cast));
+                $this->arrayToLines($value, $transform, $this->isAssociative($value));
                 $this->indentationLevel--;
                 $this->newLine('],');
             } else {
-                $key = $isAssoc ? "'" . $key . "' => " : "";
+                $key = $isAssociative ? "'" . $key . "' => " : "";
                 $value = $transform($value);
 
                 if (is_string($value)) {
@@ -147,7 +145,7 @@ class ArrayToFile
      * @param $array
      * @return bool
      */
-    protected function isAssoc($array)
+    protected function isAssociative($array)
     {
         if (array() === $array) {
             return false;

@@ -16,8 +16,8 @@ class ArrayWriter
      * @return void
      * @throws FileSaveException
      */
-    public static function toFile($array, $filename, $transform = null)
+    public static function toFile($array, $filepath, $transform = null)
     {
-        ArrayToFile::make()->write($array, $filename, $transform);
+        ArrayToFile::make()->write($array, $filepath, $transform);
     }
 }
