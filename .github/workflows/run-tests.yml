@@ -38,6 +38,11 @@ jobs:
         run: vendor/bin/phpunit
         if: matrix.php != '7.4'
       
-      - name: Execute Tests with Coverage
-        run: php ./vendor/bin/phpunit --verbose --coverage-clover=coverage.clover
-        if: matrix.php == '7.4'
+      - name: Tests with Code Climate Coverage
+        uses: paambaati/codeclimate-action@v2.6.0
+        env:
+          CC_TEST_REPORTER_ID: 1ca8cde3a7a0fc5d856eb5875253744c482c6ad5513a85e13743f709016a6111
+        with:
+          coverageCommand: php ./vendor/bin/phpunit --verbose --coverage-clover=coverage.clover
+          coverageLocations: |
+            ${{github.workspace}}/build/logs/clover.xml:clover

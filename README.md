@@ -1,11 +1,11 @@
 # Convert a php array into an includeable php file
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/kfriars/php-array-to-file.svg?style=flat-square)](https://packagist.org/packages/kfriars/php-array-to-file)
+[![Total Downloads](https://img.shields.io/packagist/dt/kfriars/php-array-to-file.svg?style=flat-square)](https://packagist.org/packages/kfriars/php-array-to-file)
 [![GitHub Tests Action Status](https://github.com/kfriars/php-array-to-file/workflows/Tests/badge.svg
 )](https://github.com/kfriars/php-array-to-file/actions?query=workflow%3Arun-tests+branch%3Amaster)
-[![Total Downloads](https://img.shields.io/packagist/dt/kfriars/php-array-to-file.svg?style=flat-square)](https://packagist.org/packages/kfriars/php-array-to-file)
-[![Maintainability](https://api.codeclimate.com/v1/badges/9a15cbdfb616e078db23/maintainability)](https://codeclimate.com/github/kfriars/php-array-to-file/maintainability)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/9a15cbdfb616e078db23/test_coverage)](https://codeclimate.com/github/kfriars/php-array-to-file/test_coverage)
+[![Maintainability](https://api.codeclimate.com/v1/badges/9a15cbdfb616e078db23/maintainability)](https://codeclimate.com/github/kfriars/php-array-to-file/maintainability)
 
 The purpose of this package is to print an array to a file in a reader-friendly format, that can later be included as php. The package supports deeply nested arrays, with numeric, string, boolean and object values.
 
