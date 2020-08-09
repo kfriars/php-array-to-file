@@ -29,10 +29,15 @@ jobs:
         with:
           php-version: ${{ matrix.php }}
           extensions: dom, curl, libxml, mbstring, zip, pcntl, pdo, sqlite, pdo_sqlite, bcmath, soap, intl, gd, exif, iconv, imagick
-          coverage: none
+          coverage: xdebug
 
       - name: Install dependencies
         run: composer update --${{ matrix.dependency-version }} --prefer-dist --no-interaction --no-suggest
 
       - name: Execute tests
         run: vendor/bin/phpunit
+        if: matrix.php != '7.4'
+      
+      - name: Execute Tests with Coverage
+        run: php ./vendor/bin/phpunit --verbose --coverage-clover=coverage.clover
+        if: matrix.php == '7.4'
