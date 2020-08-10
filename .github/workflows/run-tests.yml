@@ -36,13 +36,41 @@ jobs:
 
       - name: Execute tests
         run: vendor/bin/phpunit
-        if: matrix.php != '7.4'
+
+  coverage:
+    needs: [ test ]
+    name: coverage
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+          os: [ubuntu-latest]
+          php: [7.4]
+          dependency-version: [prefer-stable]
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Cache dependencies
+        uses: actions/cache@v1
+        with:
+          path: ~/.composer/cache/files
+          key: dependencies-laravel-${{ matrix.laravel }}-php-${{ matrix.php }}-composer-${{ hashFiles('composer.json') }}
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php }}
+          extensions: dom, curl, libxml, mbstring, zip, pcntl, pdo, sqlite, pdo_sqlite, bcmath, soap, intl, gd, exif, iconv, imagick
+          coverage: xdebug
+
+      - name: Install dependencies
+        run: composer update --${{ matrix.dependency-version }} --prefer-dist --no-interaction --no-suggest
       
       - name: Tests with Code Climate Coverage
         uses: paambaati/codeclimate-action@v2.6.0
         env:
           CC_TEST_REPORTER_ID: 1ca8cde3a7a0fc5d856eb5875253744c482c6ad5513a85e13743f709016a6111
         with:
-          coverageCommand: php ./vendor/bin/phpunit --verbose --coverage-clover=coverage.clover
+          coverageCommand: composer test-coverage
           coverageLocations: |
             ${{github.workspace}}/build/logs/clover.xml:clover
