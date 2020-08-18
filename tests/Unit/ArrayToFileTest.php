@@ -132,4 +132,14 @@ class ArrayToFileTest extends TestCase
 
         (new ArrayToFile($fileDouble))->write([1, 2, 3], $this->file);
     }
+
+    /** @test */
+    public function creates_a_new_directory_if_one_does_not_exist()
+    {
+        $inFolder = __DIR__.'/folder/test.php';
+
+        ArrayWriter::toFile(['a' => 1, 'b' => 2, 'c' => 3, 'd' => true], $inFolder);
+
+        $this->assertTrue(file_exists($inFolder));
+    }
 }

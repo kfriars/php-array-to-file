@@ -20,7 +20,7 @@ class File implements FileContract
         $directory = $this->directory($filepath);
         
         if (! file_exists($directory)) {
-            if (mkdir($directory, 0775, true)) {
+            if (mkdir($directory, 0775, true) === false) {
                 throw new FileSaveException("Could not create the directory '{$directory}' to save the file.");
             }
         }

@@ -10,3 +10,7 @@ All notable changes to `php-array-to-file` will be documented in this file
 
 - Automatically create a folder for files if it does not already exist
 - Remove test coverage from test workflow, since it is covered in the coverage job
+
+## 1.1.1 - 2020-08-18
+
+- Fixed error handling for folder creation bug
