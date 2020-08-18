@@ -100,6 +100,7 @@ class ArrayToFile
                 $this->arrayToLines($value, $transform, $this->isAssociative($value));
                 $this->indentationLevel--;
                 $this->newLine('],');
+
                 continue;
             }
 
