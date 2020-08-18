@@ -100,18 +100,19 @@ class ArrayToFile
                 $this->arrayToLines($value, $transform, $this->isAssociative($value));
                 $this->indentationLevel--;
                 $this->newLine('],');
-            } else {
-                $key = $isAssociative ? "'" . $key . "' => " : "";
-                $value = $transform($value);
-
-                if (is_string($value)) {
-                    $value = "'" . $value . "'";
-                } elseif (is_bool($value)) {
-                    $value = $value ? 'true' : 'false';
-                }
-
-                $this->newLine($key . $value . ",");
+                continue;
             }
+
+            $key = $isAssociative ? "'$key' => " : "";
+            $value = $transform($value);
+
+            if (is_string($value)) {
+                $value = "'$value'";
+            } elseif (is_bool($value)) {
+                $value = $value ? 'true' : 'false';
+            }
+
+            $this->newLine($key . $value . ",");
         }
     }
 
