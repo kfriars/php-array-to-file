@@ -150,8 +150,8 @@ class ArrayToFileTest extends TestCase
     /** @test */
     public function creates_a_new_directory_if_one_does_not_exist()
     {
-        $folder = __DIR__.'/folder';
-        $file = $folder.'/test.php';
+        $folder = __DIR__.DIRECTORY_SEPARATOR.'folder';
+        $file = $folder.DIRECTORY_SEPARATOR.'test.php';
         
         if (file_exists($file)) {
             unlink($file);
