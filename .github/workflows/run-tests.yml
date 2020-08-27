@@ -44,7 +44,7 @@ jobs:
     strategy:
       matrix:
           os: [ubuntu-latest]
-          php: [7.4]
+          php: [7.2]
           dependency-version: [prefer-stable]
     steps:
       - name: Checkout code

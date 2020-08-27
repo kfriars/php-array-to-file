@@ -12,7 +12,7 @@ use PHPUnit\Framework\TestCase;
 class ArrayToFileTest extends TestCase
 {
     /** @var string */
-    private $file = __DIR__.'/test.php';
+    protected $file = __DIR__.'/test.php';
 
     protected function tearDown(): void
     {
@@ -84,6 +84,18 @@ class ArrayToFileTest extends TestCase
     }
 
     /** @test */
+    public function properly_writes_empty_arrays()
+    {
+        ArrayWriter::toFile(['a', [], 'c'], $this->file);
+
+        $lines = file($this->file);
+        $this->assertEquals("    'a',".PHP_EOL, $lines[3]);
+        $this->assertEquals("    '1' => [".PHP_EOL, $lines[4]);
+        $this->assertEquals("    ],".PHP_EOL, $lines[5]);
+        $this->assertEquals("    'c',".PHP_EOL, $lines[6]);
+    }
+
+    /** @test */
     public function omits_keys_from_sequential_arrays()
     {
         ArrayWriter::toFile(['a', 'b', 'c'], $this->file);
@@ -123,10 +135,12 @@ class ArrayToFileTest extends TestCase
     /** @test */
     public function throws_an_error_when_writing_fails()
     {
-        $fileDouble = Mockery::mock(File::class)->makePartial();
+        $fileDouble = Mockery::mock(File::class)
+                             ->shouldAllowMockingProtectedMethods()
+                             ->makePartial();
 
-        $fileDouble->shouldReceive('save')
-                    ->andThrow(new FileSaveException("Could not write the contents to {$this->file}"));
+        $fileDouble->shouldReceive('writeToFile')
+                   ->andReturn(true);
 
         $this->expectException(FileSaveException::class);
 
@@ -136,10 +150,34 @@ class ArrayToFileTest extends TestCase
     /** @test */
     public function creates_a_new_directory_if_one_does_not_exist()
     {
-        $inFolder = __DIR__.'/folder/test.php';
+        $folder = __DIR__.'/folder';
+        $file = $folder.'/test.php';
+        
+        if (file_exists($file)) {
+            unlink($file);
+        }
 
-        ArrayWriter::toFile(['a' => 1, 'b' => 2, 'c' => 3, 'd' => true], $inFolder);
+        rmdir($folder);
+        ArrayWriter::toFile(['a' => 1, 'b' => 2, 'c' => 3, 'd' => true], $file);
 
-        $this->assertTrue(file_exists($inFolder));
+        $this->assertTrue(file_exists($folder));
+    }
+
+    /** @test */
+    public function throws_an_error_when_making_a_non_existent_directory_fails()
+    {
+        $fileDouble = Mockery::mock(File::class)
+                             ->shouldAllowMockingProtectedMethods()
+                             ->makePartial();
+
+        $fileDouble->shouldReceive('directoryExists')
+                   ->andReturn(false);
+
+        $fileDouble->shouldReceive('makeDirectory')
+                   ->andReturn(true);
+
+        $this->expectException(FileSaveException::class);
+
+        (new ArrayToFile($fileDouble))->write([1, 2, 3], $this->file);
     }
 }

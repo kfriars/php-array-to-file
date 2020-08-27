@@ -14,3 +14,7 @@ All notable changes to `php-array-to-file` will be documented in this file
 ## 1.1.1 - 2020-08-18
 
 - Fixed error handling for folder creation bug
+
+## 1.1.2 - 2020-08-27
+
+- Increade test coverage to 100% and lowered the required php version to 7.2
