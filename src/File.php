@@ -73,8 +73,8 @@ class File implements FileContract
      * @param string $content
      * @return bool
      */
-    protected function writeToFile(string $filepath, string $content)
+    protected function writeToFile(string $filepath, string $content): bool
     {
-        file_put_contents($filepath, $content) === false;
+        return file_put_contents($filepath, $content) === false;
     }
 }
